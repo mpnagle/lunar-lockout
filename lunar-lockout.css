@@ -1,0 +1,60 @@
+/* CSS declarations go here */
+
+body{
+    background:beige;
+    font-family: Monaco;
+}
+
+.title{
+    font-size:24px;
+    border: 0px;
+    border-color:black;
+    border-style:solid;
+    padding:10px;
+}
+
+table {
+    border:2px;
+    border-color:black;
+    border-style:solid;
+}
+
+td {
+    color:red;
+    border:2px;
+    border-color:black;
+    border-style:solid;
+    width:60px;
+    height:60px;
+    text-align:center;
+    background-color:black;
+}
+
+.exit {
+    background-color:pink;
+    }
+
+/* better way to do this for sure! */
+.blue {
+    color:blue;
+}
+
+.green {
+    color:green;
+}
+
+.red {
+    color:red;
+}
+
+.yellow{
+    color:yellow;
+}
+
+.orange{
+    color:orange;
+}
+
+.robot{
+    font-weight:bold;
+}

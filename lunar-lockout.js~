@@ -1,0 +1,134 @@
+var grid = [];
+
+for (var i=0; i<5; i++)
+{
+    grid[i]= ["","","","",""];
+}
+
+var robotRow = "c";
+var robotCol = 5;
+var robotSelector = "#" + robotRow + robotCol;
+
+var robotIcon = "X";
+var robotString = "<p>" + robotIcon + "</p>";
+
+function robotUpdate(row, col)
+{
+    $(robotSelector).html("");
+    robotSelector = "#" + row + col;
+    
+    $(robotSelector).html(robotString);
+}
+
+function robotLeft()
+{
+    while (robotCol > 1)
+    {	
+	robotCol = robotCol - 1;	
+	setTimeout(robotUpdate(robotRow, robotCol),1000);
+    }
+    
+}
+
+
+function robotRight()
+{
+    while (robotCol < 5)
+    {
+	robotCol = robotCol + 1;
+	robotUpdate(robotRow, robotCol);
+    }
+}
+
+function robotUp()
+{
+
+    //who knew this comparison would work!
+    while (robotRow>"a")
+    {
+
+	//string --> num ---> -1 --> back to string. thank you stack overflow! 
+	var rowInt = robotRow.charCodeAt();
+	rowInt = rowInt - 1;
+	robotRow = String.fromCharCode(rowInt);
+	
+	console.log(robotRow);
+	
+
+
+
+	
+	robotUpdate(robotRow, robotCol);
+    }
+}
+
+function robotDown()
+{
+    while (robotRow < "e")
+    {
+	rowInt = robotRow.charCodeAt();
+	rowInt = rowInt + 1;
+	robotRow = String.fromCharCode(rowInt);
+
+	robotUpdate(robotRow, robotCol);
+    }
+
+
+}
+
+
+if (Meteor.isClient) {
+
+    Meteor.defer(function(){
+	$(robotSelector).html("X");
+    });
+
+
+    
+    Template.grid.events({
+	'keydown': function(evt) {
+	    console.log(evt);
+	    console.log("right!");
+	}
+    });
+
+
+$(document).keydown(function(evt){
+    
+    switch(evt.keyCode)
+    {
+	//left arrow
+    case 37:
+	console.log("case; left!");
+	robotLeft();
+	break;
+	//up arrow
+    case 38:
+	robotUp();
+	break;
+	//right arrow
+    case 39:
+	robotRight();
+	break;
+	//down arrow
+    case 40:
+	robotDown();
+	break;
+    }
+
+});
+
+
+
+}
+
+
+
+
+
+
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    // code to run on server at startup
+  });
+}
